@@ -1,0 +1,46 @@
+from tkinter import *
+root=Tk()
+root.geometry("400x450")
+root.resizable(False,False)
+
+def add():
+  task=entry_1.get()
+  if task:
+        listbox.insert(END, task)
+        entry_1.delete(0,END)
+
+def edit():
+    selected_task_index = listbox.curselection()
+    if selected_task_index:
+        selected_task_text = listbox.get(selected_task_index)
+        entry_1.delete(0,END)
+        entry_1.insert(0, selected_task_text)
+        listbox.delete(selected_task_index)
+
+def remove():
+    selected_task_index = listbox.curselection()
+    if selected_task_index:
+        listbox.delete(selected_task_index)
+
+sc1=Label(root,text="TO-DO LIST",bg="yellow",font="lucida",width=38,height=5)
+sc1.pack(padx=0,pady=10)
+sc2=Label(root,text="Add Items")
+sc2.place(x=50,y=150)
+sc3=Label(root,text="Tasks")
+sc3.place(x=40,y=220)
+
+entry_1=Entry(root,text="",width=20)
+entry_1.place(x=20,y=180)
+
+b1=Button(root,text="Add",bg="white",command=add,width=15,height=2)
+b1.place(x=180,y=170)
+b2=Button(root,text="Edit",bg="white",command=edit,width=15,height=2)
+b2.place(x=280,y=300)
+b3=Button(root,text="Delete",bg="white",command=remove,width=15,height=2)
+b3.place(x=280,y=350)
+
+listbox = Listbox(root, selectmode=SINGLE,width=40,height=15)
+listbox.place(x=10,y=250)
+
+
+root.mainloop()
